@@ -5,7 +5,7 @@ const http = require("http");
 const socketIo = require("socket.io");
 
 app.set("views", "views");
-app.set("view engine", "ejs");
+app.set("view engine", "html");
 
 app.use(express.static("public"));
 
