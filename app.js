@@ -26,7 +26,42 @@ io.on('connection', socket => {
   
   console.log("a new user just connected");
 
-  socket.on("disconnect", () => {
+  // socket.emit('newMessage', {
+  //   name: "Navid",
+  //   text: "Hello, Thank's I'm good"
+  // });
+
+  socket.on('createMessage', message => {
+    
+    console.log("Created message => ", message);
+
+    const { name, text } = message;
+
+    // io.emit("newMessage", {
+    //   name,
+    //   text,
+    //   createdAt: new Date().getTime()
+    // });
+
+    // socket.broadcast.emit("newMessage", {
+    //   name,
+    //   text,
+    //   createdAt: new Date().getTime()
+    // });
+
+    socket.emit('newMessage', {
+      name: "Admin",
+      text: "Welcome to the messenger"
+    });
+
+    socket.broadcast.emit('newMessage', {
+      name: "Admin",
+      text: "a new user joined"
+    });
+
+  });
+  
+  socket.on('disconnect', () => {
     console.log("user disconnect to the messenger");
   });
 
